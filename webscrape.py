@@ -83,7 +83,7 @@ def get_weather_info():
     formatted_text = re.sub(r'\s+', ' ', div_content.get_text()).strip() # formating the string to make it neat
     index = formatted_text.find("Roads: ")
     weather = get_weather_update(formatted_text)
-    return formatted_text[index:index+7] + weather.upper() +" \n" + formatted_text[index+8+len(weather):]
+    return formatted_text[index:index+7] + weather.upper() +" \n\n" + formatted_text[index+8+len(weather):]
 
 def get_weather_update(formatted_text):
     num = formatted_text.find("Roads: ")+ 7
