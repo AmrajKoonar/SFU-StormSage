@@ -81,7 +81,8 @@ def get_weather_info():
     soup = BeautifulSoup(response.text, 'html.parser')
     div_content = soup.find('section', class_='block')
     formatted_text = re.sub(r'\s+', ' ', div_content.get_text()).strip() # formating the string to make it neat
-    return formatted_text
+    index = formatted_text.find("Roads: ")
+    return formatted_text[index:]
 
 def get_weather_update(formatted_text):
     num = formatted_text.find("Roads: ")+ 7
@@ -91,5 +92,3 @@ def get_weather_update(formatted_text):
             weathercondition = formatted_text[num:num+i]
             break
     return weathercondition
-
-
