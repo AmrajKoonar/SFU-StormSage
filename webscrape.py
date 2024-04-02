@@ -82,10 +82,10 @@ def get_weather_info():
     div_content = soup.find('section', class_='block')
     formatted_text = re.sub(r'\s+', ' ', div_content.get_text()).strip() # formating the string to make it neat
     index = formatted_text.find("Roads: ")
-    return formatted_text[index:]
+    return formatted_text[index:index+7] + "\n" + formatted_text[index+7:]
 
 def get_weather_update(formatted_text):
-    num = formatted_text.find("Roads: ")+ 7
+    num = formatted_text.find("Roads: ")+ 8
     # extract weather condition keyword
     for i in range(20):
         if(formatted_text[num+i] == ' '):
