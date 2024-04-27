@@ -86,11 +86,24 @@ dict = {
 
 
 def get_weather_info():      
+
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     div_content = soup.find('section', class_='block')
     formatted_text = re.sub(r'\s+', ' ', div_content.get_text()).strip() # formating the string to make it neat
+
+    tempindexstart = formatted_text.find("currently")+10
+    tempindexend = 0
+    for i in range(tempindexstart, tempindexstart+10):
+        if(formatted_text[i] == " "):
+            tempindexend = i
+            break
+    formatted_text = formatted_text[:tempindexstart] + get_weather_api_info("Burnaby")+ formatted_text[tempindexend:] # change temp using weatherapi to make more real
+
+
+
+
     index = formatted_text.find("Roads: ")
     weather = get_weather_update(formatted_text)
     index2 = formatted_text.find("Weather Conditions Traffic Notices")
@@ -103,4 +116,11 @@ def get_weather_update(formatted_text):
         if(formatted_text[num+i] == ' '):
             weathercondition = formatted_text[num:num+i]
             break
+
+
     return weathercondition
+
+name = get_weather_info()
+name1 = get_weather_api_info("Burnaby")
+print(name)
+print(name1)
