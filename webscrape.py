@@ -15,6 +15,8 @@ import requests
 from bs4 import BeautifulSoup
 
 import re
+
+#FOR IMAGE SCRAPING:
 # from ESRGAN_master import test
 
 # options = webdriver.ChromeOptions()
@@ -65,6 +67,9 @@ dict = {
     "img_url_Tower_Road_South":"http://ns-webcams.its.sfu.ca/public/images/towers-current.jpg",
     "img_url_University_Drive_North":"http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
 }
+
+#INCASE WE DO IMAGE SCRAPING TWEETS:
+
 # img_url_AQ_North = "http://ns-webcams.its.sfu.ca/public/images/aqn-current.jpg"
 # img_url_AQ_SouthWest = "http://ns-webcams.its.sfu.ca/public/images/aqsw-current.jpg"
 # img_url_AQ_SouthEast = "http://ns-webcams.its.sfu.ca/public/images/aqse-current.jpg"
@@ -86,7 +91,6 @@ dict = {
 
 
 def get_weather_info():      
-
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -100,17 +104,14 @@ def get_weather_info():
             tempindexend = i
             break
     formatted_text = formatted_text[:tempindexstart] + get_weather_api_info("Burnaby")+ formatted_text[tempindexend:] # change temp using weatherapi to make more real
-
-
-
-
     index = formatted_text.find("Roads: ")
     weather = get_weather_update(formatted_text)
     index2 = formatted_text.find("Weather Conditions Traffic Notices")
     return formatted_text[index:index+7] + weather.upper() +" \n\n" + formatted_text[index+8+len(weather):index2]
 
 def get_weather_update(formatted_text):
-    num = formatted_text.find("Roads: ")+ 7
+    num = formatted_text.find("Roads: ") + 7
+
     # extract weather condition keyword
     for i in range(20):
         if(formatted_text[num+i] == ' '):
@@ -119,8 +120,3 @@ def get_weather_update(formatted_text):
 
 
     return weathercondition
-
-name = get_weather_info()
-name1 = get_weather_api_info("Burnaby")
-print(name)
-print(name1)
