@@ -3,6 +3,7 @@ from keys_test import api_key, api_secret, bearer_token, access_token, access_to
 from webscrape import get_weather_info, get_weather_update
 import time
 from datetime import datetime
+from webscrape import get_weather_api_info
 
 client = tweepy.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
 auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
@@ -17,6 +18,10 @@ while(True):
     time_str = current_time.strftime("%I:%M %p") 
     weatherInfo = get_weather_info()  #returns the a sentence describing the weather 
     weather = get_weather_update(weatherInfo)    #returns the weather (dry, snow, rain etc)
+    
+    city = "Burnaby"  
+    cityWeather = get_weather_api_info(city) 
+    print(cityWeather)
 
     print("Twitter Bot Status: ACTIVE | Time: " + time_str)
 

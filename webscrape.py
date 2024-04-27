@@ -21,6 +21,16 @@ import re
 # service = Service(ChromeDriverManager().install())
 # wd = webdriver.Chrome(service=service, options=options)
 
+import requests
+
+def get_weather_api_info(city, api_key='d651c8cbf6434546aef232841242604'):
+    url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}&aqi=no"
+    response = requests.get(url)
+    data = response.json()
+    weather_condition = data['current']['condition']['text']
+    temperature = data['current']['temp_c']
+    weather_info = f"{temperature}°C"
+    return weather_info
 
 
 def download_image(download_path, url, file_name):
