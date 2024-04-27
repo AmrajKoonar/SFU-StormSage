@@ -1,3 +1,5 @@
+#Amraj & Amar Koonar Twitter Bot
+
 import tweepy
 from keys_test import api_key, api_secret, bearer_token, access_token, access_token_secret
 from webscrape import get_weather_info, get_weather_update
