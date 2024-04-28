@@ -28,11 +28,11 @@ while(True):
     amOrPm = time_str[-2:]
 
     if hour == 12 or (1 <= hour <= 6 and amOrPm == "AM"):
-        print("It is night time")
+        print("It is night time\n")
         client.create_tweet(text = weatherInfo + "\n\n" + "Current time: " + time_str)
         next_sleep = threeHours  
     else:
-        print("It is daytime")
+        print("It is daytime\n")
         client.create_tweet(text = weatherInfo + "\n\n" + "Current time: " + time_str)
         next_sleep = oneHour 
 
