@@ -1,11 +1,3 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-
 import time
 
 from PIL import Image
@@ -16,9 +8,16 @@ from bs4 import BeautifulSoup
 
 import re
 
-#FOR IMAGE SCRAPING:
-# from ESRGAN_master import test
+#IMPORTS FOR IMAGE SCRAPING (will be used in V2):
+# from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.common.by import By
+# from selenium.common.exceptions import NoSuchElementException
 
+#FOR IMAGE SCRAPING (will be used in V2):
+# from ESRGAN_master import test
 # options = webdriver.ChromeOptions()
 # service = Service(ChromeDriverManager().install())
 # wd = webdriver.Chrome(service=service, options=options)
@@ -68,8 +67,7 @@ dict = {
     "img_url_University_Drive_North":"http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
 }
 
-#INCASE WE DO IMAGE SCRAPING TWEETS:
-
+#INCASE WE DO IMAGE SCRAPING TWEETS (will be used in V2):
 # img_url_AQ_North = "http://ns-webcams.its.sfu.ca/public/images/aqn-current.jpg"
 # img_url_AQ_SouthWest = "http://ns-webcams.its.sfu.ca/public/images/aqsw-current.jpg"
 # img_url_AQ_SouthEast = "http://ns-webcams.its.sfu.ca/public/images/aqse-current.jpg"
@@ -77,17 +75,12 @@ dict = {
 # img_url_Tower_Road_North = "http://ns-webcams.its.sfu.ca/public/images/towern-current.jpg"
 # img_url_Tower_Road_South = "http://ns-webcams.its.sfu.ca/public/images/towers-current.jpg"
 # img_url_University_Drive_North = "http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
-
-
 # path = "C:\\Users\\capta\\OneDrive\\Desktop\\bot\\imgs\\"
 # loop = True
 # for name in dict:
 #     download_image(path,dict[name],name+'.jpg')   
-        
 # download_image('', img_url,'test.jpg')
 # crop_img('',"test.jpg")
-
-
 
 
 def get_weather_info():      
