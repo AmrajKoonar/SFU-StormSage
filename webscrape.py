@@ -87,20 +87,29 @@ def get_weather_info():
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
-    div_content = soup.find('section', class_='block')
-    formatted_text = re.sub(r'\s+', ' ', div_content.get_text()).strip() # formating the string to make it neat
+    div_contents = soup.find_all('div', class_='text parbase section')
+    for div in div_contents:
+        p_tag = div.find('p')
+        if p_tag:
+            temp_info = re.sub(r'\s+', ' ', p_tag.get_text()).strip()
+            if "It is currently" in temp_info:
+                formatted_text = temp_info
 
-    tempindexstart = formatted_text.find("currently")+10
-    tempindexend = 0
-    for i in range(tempindexstart, tempindexstart+10):
-        if(formatted_text[i] == " "):
-            tempindexend = i
-            break
-    formatted_text = formatted_text[:tempindexstart] + get_weather_api_info("Burnaby")+ formatted_text[tempindexend:] # change temp using weatherapi to make more real
-    index = formatted_text.find("Roads: ")
-    weather = get_weather_update(formatted_text)
-    index2 = formatted_text.find("Weather Conditions Traffic Notices")
-    return formatted_text[index:index+7] + weather.upper() +" \n\n" + formatted_text[index+8+len(weather):index2]
+
+    # print("TEST " + formatted_text)
+    # tempindexstart = formatted_text.find("currently")+10
+    # tempindexend = 0
+    # for i in range(tempindexstart, tempindexstart+10):
+    #     if(formatted_text[i] == " "):
+    #         tempindexend = i
+    #         break
+    # formatted_text = formatted_text[:tempindexstart] + get_weather_api_info("Burnaby")+ formatted_text[tempindexend:] # change temp using weatherapi to make more real
+    # index = formatted_text.find("Roads: ")
+    # weather = get_weather_update(formatted_text)
+    # index2 = formatted_text.find("Weather Conditions Traffic Notices")
+    # return formatted_text[index:index+7] + weather.upper() +" \n\n" + formatted_text[index+8+len(weather):index2]
+
+    return formatted_text
 
 def get_weather_update(formatted_text):
     num = formatted_text.find("Roads: ") + 7
@@ -113,3 +122,19 @@ def get_weather_update(formatted_text):
 
 
     return weathercondition
+# def web():
+#     url = 'https://www.sfu.ca/security/sfuroadconditions/'
+#     response = requests.get(url)
+#     soup = BeautifulSoup(response.text, 'html.parser')
+#     div_contents = soup.find_all('div', class_='text parbase section')
+#     for div in div_contents:
+#         p_tag = div.find('p')
+#         if p_tag:
+#             temp_info = p_tag.get_text(strip=True)
+#             if "It is currently" in temp_info:
+#                 print(temp_info)
+#                 break
+
+
+name = get_weather_info()
+print(name)
