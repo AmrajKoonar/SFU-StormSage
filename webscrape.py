@@ -136,5 +136,3 @@ def get_weather_update(formatted_text):
 #                 break
 
 
-name = get_weather_info()
-print(name)
