@@ -66,23 +66,6 @@ dict = {
     "img_url_Tower_Road_South":"http://ns-webcams.its.sfu.ca/public/images/towers-current.jpg",
     "img_url_University_Drive_North":"http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
 }
-
-#INCASE WE DO IMAGE SCRAPING TWEETS (will be used in V2):
-# img_url_AQ_North = "http://ns-webcams.its.sfu.ca/public/images/aqn-current.jpg"
-# img_url_AQ_SouthWest = "http://ns-webcams.its.sfu.ca/public/images/aqsw-current.jpg"
-# img_url_AQ_SouthEast = "http://ns-webcams.its.sfu.ca/public/images/aqse-current.jpg"
-# img_url_Gaglardi_intersection = "http://ns-webcams.its.sfu.ca/public/images/gaglardi-current.jpg"
-# img_url_Tower_Road_North = "http://ns-webcams.its.sfu.ca/public/images/towern-current.jpg"
-# img_url_Tower_Road_South = "http://ns-webcams.its.sfu.ca/public/images/towers-current.jpg"
-# img_url_University_Drive_North = "http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
-# path = "C:\\Users\\capta\\OneDrive\\Desktop\\bot\\imgs\\"
-# loop = True
-# for name in dict:
-#     download_image(path,dict[name],name+'.jpg')   
-# download_image('', img_url,'test.jpg')
-# crop_img('',"test.jpg")
-
-
 def get_weather_info():      
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
     response = requests.get(url)
@@ -95,19 +78,6 @@ def get_weather_info():
             if "It is currently" in temp_info:
                 formatted_text = temp_info
 
-
-    # print("TEST " + formatted_text)
-    # tempindexstart = formatted_text.find("currently")+10
-    # tempindexend = 0
-    # for i in range(tempindexstart, tempindexstart+10):
-    #     if(formatted_text[i] == " "):
-    #         tempindexend = i
-    #         break
-    # formatted_text = formatted_text[:tempindexstart] + get_weather_api_info("Burnaby")+ formatted_text[tempindexend:] # change temp using weatherapi to make more real
-    # index = formatted_text.find("Roads: ")
-    # weather = get_weather_update(formatted_text)
-    # index2 = formatted_text.find("Weather Conditions Traffic Notices")
-    # return formatted_text[index:index+7] + weather.upper() +" \n\n" + formatted_text[index+8+len(weather):index2]
 
     return formatted_text
 
@@ -122,17 +92,11 @@ def get_weather_update(formatted_text):
 
 
     return weathercondition
-# def web():
-#     url = 'https://www.sfu.ca/security/sfuroadconditions/'
-#     response = requests.get(url)
-#     soup = BeautifulSoup(response.text, 'html.parser')
-#     div_contents = soup.find_all('div', class_='text parbase section')
-#     for div in div_contents:
-#         p_tag = div.find('p')
-#         if p_tag:
-#             temp_info = p_tag.get_text(strip=True)
-#             if "It is currently" in temp_info:
-#                 print(temp_info)
-#                 break
 
-
+def get_update():
+    url = 'https://www.sfu.ca/security/sfuroadconditions/'
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    current = soup.find('div', class_='block grey')
+    lines = current.text.split('\n')
+    return lines[1].strip() if len(lines) > 1 else None
