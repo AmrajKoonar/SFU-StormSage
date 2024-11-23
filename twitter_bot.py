@@ -33,4 +33,4 @@ while(True):
     print("Twitter Bot Status: ACTIVE | Time: " + time_str + " | Mode: " + nightOrDay)
     prev = get_update()
     
-    time.sleep(7200)#sleep for 2hrs
+    time.sleep(900)#sleep for 15mins

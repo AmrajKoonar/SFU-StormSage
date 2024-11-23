@@ -7,6 +7,8 @@ import requests
 from bs4 import BeautifulSoup
 
 import re
+import os
+import requests
 
 #IMPORTS FOR IMAGE SCRAPING (will be used in V2):
 # from selenium import webdriver
@@ -22,7 +24,8 @@ import re
 # service = Service(ChromeDriverManager().install())
 # wd = webdriver.Chrome(service=service, options=options)
 
-import requests
+
+
 
 def get_weather_api_info(city, api_key='d651c8cbf6434546aef232841242604'):
     url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}&aqi=no"
@@ -58,13 +61,13 @@ def crop_img(download_path, file_name):
         cropped_image.save(f, 'JPEG')
 
 dict = {
-    "img_url_AQ_North": "http://ns-webcams.its.sfu.ca/public/images/aqn-current.jpg",
-    "img_url_AQ_SouthWest":"http://ns-webcams.its.sfu.ca/public/images/aqsw-current.jpg",
-    "img_url_AQ_SouthEast":"http://ns-webcams.its.sfu.ca/public/images/aqse-current.jpg",
-    "img_url_Gaglardi_intersection":"http://ns-webcams.its.sfu.ca/public/images/gaglardi-current.jpg",
-    "img_url_Tower_Road_North ":"http://ns-webcams.its.sfu.ca/public/images/towern-current.jpg",
-    "img_url_Tower_Road_South":"http://ns-webcams.its.sfu.ca/public/images/towers-current.jpg",
-    "img_url_University_Drive_North":"http://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
+    "img_url_AQ_North": "https://ns-webcams.its.sfu.ca/public/images/aqn-current.jpg",
+    "img_url_AQ_SouthWest":"https://ns-webcams.its.sfu.ca/public/images/aqsw-current.jpg",
+    "img_url_AQ_SouthEast":"https://ns-webcams.its.sfu.ca/public/images/aqse-current.jpg",
+    "img_url_Gaglardi_intersection":"https://ns-webcams.its.sfu.ca/public/images/gaglardi-current.jpg",
+    "img_url_Tower_Road_North ":"https://ns-webcams.its.sfu.ca/public/images/towern-current.jpg",
+    "img_url_Tower_Road_South":"https://ns-webcams.its.sfu.ca/public/images/towers-current.jpg",
+    "img_url_University_Drive_North":"https://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
 }
 def get_weather_info():      
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
@@ -100,3 +103,18 @@ def get_update():
     current = soup.find('div', class_='block grey')
     lines = current.text.split('\n')
     return lines[1].strip() if len(lines) > 1 else None
+
+def download_images(image_urls):
+    save_directory = os.getcwd()
+
+    for filename, url in image_urls.items():
+        try:
+            response = requests.get(url, stream=True)
+            response.raise_for_status() 
+            file_path = os.path.join(save_directory, f"{filename}.jpg")
+            with open(file_path, "wb") as file:
+                for chunk in response.iter_content(1024):
+                    file.write(chunk)
+            print(f"Downloaded: {filename}")
+        except Exception as e:
+            print(f"Failed to download {filename} from {url}: {e}")
