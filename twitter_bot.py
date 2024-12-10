@@ -18,7 +18,7 @@ prev = ""
 while(True):
     current_time = datetime.now()
     time_str = current_time.strftime("%I:%M %p") 
-    weatherInfo = get_weather_info()  #returns the a sentence describing the weather 
+    weatherInfo = get_weather_info()  #returns a sentence describing the weather 
     
 
     hour = current_time.hour

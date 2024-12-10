@@ -67,7 +67,8 @@ dict = {
     "img_url_Gaglardi_intersection":"https://ns-webcams.its.sfu.ca/public/images/gaglardi-current.jpg",
     "img_url_Tower_Road_North ":"https://ns-webcams.its.sfu.ca/public/images/towern-current.jpg",
     "img_url_Tower_Road_South":"https://ns-webcams.its.sfu.ca/public/images/towers-current.jpg",
-    "img_url_University_Drive_North":"https://ns-webcams.its.sfu.ca/public/images/udn-current.jpg"
+    "img_url_University_Drive_North":"https://ns-webcams.its.sfu.ca/public/images/udn-current.jpg",
+    "img_url_Blusson_Hall_Roof": "https://ns-webcams.its.sfu.ca/public/images/wmcroof-current.jpg"
 }
 def get_weather_info():      
     url = 'https://www.sfu.ca/security/sfuroadconditions/'
