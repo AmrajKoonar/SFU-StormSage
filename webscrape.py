@@ -105,7 +105,7 @@ def get_update():
     lines = current.text.split('\n')
     return lines[1].strip() if len(lines) > 1 else None
 
-def download_images(image_urls):
+def download_images(image_urls = dict):
     save_directory = os.getcwd()
 
     for filename, url in image_urls.items():
