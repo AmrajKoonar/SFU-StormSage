@@ -11,8 +11,7 @@ from webscrape import get_weather_api_info, download_images
 
 client = tweepy.Client(bearer_token, api_key, api_secret, access_token, access_token_secret)
 auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
-api = tweepy.API(auth)
-
+api = tweepy.API(auth, wait_on_rate_limit=True)
 oneHour = 3600
 threeHours = 10800 
 previousWeather = ""
