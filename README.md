@@ -58,7 +58,7 @@ TWITTER_ACCESS_SECRET=your_token_secret
 python bot.py
 ```
 
-The bot will begin scraping data and tweeting updates automatically.
+The bot will begin scraping data and automatically tweet updates.
 
 ---
 
