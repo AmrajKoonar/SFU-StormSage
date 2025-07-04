@@ -1,6 +1,6 @@
 # 🌩️ SFU StormSage – Weather Alert Twitter Bot
 
-A Python-powered Twitter bot that delivers real-time weather alerts, road and parking conditions, and driving updates for SFU Burnaby campus. Built by **Amraj Koonar** and **Amar Koonar**, this bot scrapes live data and webcam feeds to keep students and staff informed as conditions change.
+A Python-powered Twitter bot that delivers real-time weather alerts, road and parking conditions, and driving updates for SFU Burnaby campus. Built by **Amraj Koonar** and **Amar Koonar**, this bot scrapes live data and webcam feeds to keep students and staff informed as conditions change. 67
 
 ---
 
